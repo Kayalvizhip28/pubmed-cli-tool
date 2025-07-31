@@ -1,0 +1,26 @@
+[project]
+name = "pubmed-cli-tool"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Kayalvizhip28", email = "kayalp2001@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "requests (>=2.32.4,<3.0.0)",
+    "click (>=8.2.1,<9.0.0)",
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "biopython (>=1.85,<2.0)"
+]
+
+[tool.poetry]
+packages = [{include = "pubmed_cli_tool", from = "src"}]
+
+# ✅ Add this section to expose your CLI command
+[tool.poetry.scripts]
+get-papers-list = "pubmed_cli_tool.pubmed_search:search"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
