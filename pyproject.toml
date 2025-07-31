@@ -19,7 +19,7 @@ packages = [{include = "pubmed_cli_tool", from = "src"}]
 
 # ✅ Add this section to expose your CLI command
 [tool.poetry.scripts]
-get-papers-list = "pubmed_cli_tool.pubmed_search:search"
+get-papers-list = "pubmed_cli_tool.cli:search"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
