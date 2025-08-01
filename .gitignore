@@ -1,3 +1,9 @@
 .env
 __pycache__
 
+# Ignore all CSV files
+*.csv
+
+# But keep this one
+!cancer_results.csv
+

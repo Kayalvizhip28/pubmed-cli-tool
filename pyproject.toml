@@ -1,26 +1,23 @@
-[project]
+[tool.poetry]
 name = "pubmed-cli-tool"
 version = "0.1.0"
-description = ""
-authors = [
-    {name = "Kayalvizhip28", email = "kayalp2001@gmail.com"}
-]
+description = "CLI tool to search PubMed articles with industry affiliations"
+authors = ["Kayal <kayalp2001@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-    "requests (>=2.32.4,<3.0.0)",
-    "click (>=8.2.1,<9.0.0)",
-    "python-dotenv (>=1.1.1,<2.0.0)",
-    "biopython (>=1.85,<2.0)"
-]
+packages = [{ include = "pubmed_cli_tool", from = "src" }]
 
-[tool.poetry]
-packages = [{include = "pubmed_cli_tool", from = "src"}]
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+click = "^8.1.7"
+biopython = "^1.81"
+python-dotenv = "^1.0.0"
 
-# ✅ Add this section to expose your CLI command
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+
 [tool.poetry.scripts]
 get-papers-list = "pubmed_cli_tool.cli:search"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core>=1.6.0"]
 build-backend = "poetry.core.masonry.api"

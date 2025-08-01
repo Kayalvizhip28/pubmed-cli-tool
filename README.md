@@ -1,164 +1,102 @@
-# 🔎 PubMed CLI Tool
+# 🧬 PubMed CLI Tool — `get-papers-list`
 
-A Python-based command-line interface to search **PubMed** articles and extract metadata for papers involving **non-academic authors**—such as those affiliated with **biotech, pharma, diagnostics, or industry-related organizations**. This tool is ideal for research analysts, medical scientists, and industry professionals to extract filtered research papers and export results into CSV format for further analysis.
+A Python-based command-line interface (CLI) to search PubMed articles and filter authors with **non-academic (industry)** affiliations such as Biotech, Pharma, Diagnostics, etc.
+
+This tool fetches relevant articles using the **NCBI Entrez API**, parses metadata like author names, affiliations, publication date, and email, and optionally saves the results to a CSV file.
 
 ---
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
-```plaintext
 pubmed_cli_tool/
 ├── src/
-│   └── pubmed_cli_tool/
-│       └── pubmed_search.py       # Core CLI logic: fetches, filters, and exports results
+│ └── pubmed_cli_tool/
+│ ├── core.py # Business logic for data fetching, filtering, and CSV saving
+│ └── cli.py # CLI command handler using Click
 ├── tests/
-│   └── test_pubmed_search.py      # Unit tests with mocked Entrez API responses
-├── .env                           # Stores NCBI_EMAIL environment variable (ignored by Git)
-├── README.md                      # Project documentation (you are here)
-├── pyproject.toml                 # Poetry dependency and script configuration
-└── .gitignore                     # Files/directories excluded from version control
+│ ├── test_core.py # Unit tests for core logic
+│ └── test_cli.py # Unit tests for CLI interactions using CliRunner
+├── .env # Contains sensitive config (e.g., NCBI_EMAIL)
+├── pyproject.toml # Poetry project config and CLI entry definition
+└── README.md # Project documentation (you are here!)
 
-📦 Installation & Setup
-✅ Requires Python 3.10+ and Poetry for dependency management.
 
-1. Clone the repository:
+---
 
-bash
-Copy
-Edit
+## 📦 Installation (via Poetry)
+
+Make sure you have [Poetry](https://python-poetry.org/docs/#installation) installed.
+
+```bash
 git clone https://github.com/your-username/pubmed_cli_tool.git
 cd pubmed_cli_tool
 
-2. Install dependencies using Poetry:
-
-bash
-Copy
-Edit
+# Create and activate virtual environment
 poetry install
+⚙️ Environment Setup
+Create a .env file in the project root with your registered email to use NCBI’s Entrez API.
 
-3. Set up environment variable for NCBI Entrez access:
-
-Create a .env file in the project root:
-
-ini
-Copy
-Edit
-NCBI_EMAIL=your_email@example.com
-This email is used by NCBI to identify your API usage.
+env
+NCBI_EMAIL=your.email@example.com
+This email is required by NCBI to monitor usage and prevent abuse.
 
 🚀 Usage
-Run the CLI tool using Poetry and provide a search query (in quotes):
+Use the command-line tool to search PubMed and extract article metadata.
 
-bash
-Copy
-Edit
-poetry run get-papers-list "cancer immunotherapy"
+Example
+poetry run get-papers-list "cancer immunotherapy" --max-results 3 --file results.csv --debug
+This command will:
+
+Fetch top 3 articles matching "cancer immunotherapy"
+
+Filter authors with industry affiliations
+
+Save results to results.csv
+
+Print debug information if enabled
 
 🔧 Optional Flags
-Flag	Description	Example
---max-results	Max number of PubMed articles to fetch (default: 5)	--max-results 10
---file	Save results to a CSV file	--file cancer_results.csv
---debug	Enable verbose logging for troubleshooting	--debug
+Option	Description
+--file	Save the results to a CSV file
+--max-results	Number of articles to fetch (default: 5)
+--debug	Enable verbose logging and error tracing
 
-✅ Example
-bash
-Copy
-Edit
-poetry run get-papers-list "cancer immunotherapy" --max-results 10 --file results.csv --debug
-This command:
-
-Searches PubMed for up to 10 papers matching the query
-
-Filters for non-academic/industry-affiliated authors
-
-Saves the extracted metadata into results.csv
-
-Displays logs in debug mode
-
-🛠️ Tools & Libraries Used
-🧬 Biopython – Used for interacting with NCBI Entrez APIs
-
-⚙️ Click – For creating clean and flexible CLI commands
-
-🧪 python-dotenv – For securely managing environment variables
-
-📦 Poetry – Dependency and package management
-
-🧪 Built-in unittest.mock – For mocking API calls during testing
-
-🧪 Running Tests
-Run unit tests to validate CLI behavior:
-
-bash
-Copy
-Edit
-poetry run pytest
-Tests are located in the /tests folder and mock the Entrez API using test cases like:
-
-Valid and invalid PubMed IDs
-
-Articles with no non-academic affiliations
-
-Email detection edge cases
-
-⚙️ Setting Up Executable CLI Command
-Your CLI command is exposed as get-papers-list via Poetry.
-
-Inside pyproject.toml:
-
-toml
-Copy
-Edit
+🛠️ Exposing CLI as get-papers-list
+Already configured in pyproject.toml:
 [tool.poetry.scripts]
-get-papers-list = "pubmed_cli_tool.pubmed_search:search"
-✅ This lets you run the tool like:
+get-papers-list = "pubmed_cli_tool.cli:search"
+Now you can run the tool like this:
 
-bash
-Copy
-Edit
-poetry run get-papers-list "your query here"
-No need to directly call the Python script!
+poetry run get-papers-list "breast cancer" --max-results 2
+📚 Libraries Used
+Click – elegant CLI creation
 
-🧹 .gitignore Configuration
-To avoid pushing sensitive and temporary files to Git:
+Biopython – access to NCBI Entrez API
 
-markdown
-Copy
-Edit
-# .gitignore
-.env
-__pycache__/
-*.py[cod]
-*.csv
-Make sure to commit your .gitignore after editing:
+python-dotenv – manage environment variables
 
-bash
-Copy
-Edit
-git add .gitignore
-git commit -m "Update .gitignore to exclude secrets and build artifacts"
-📤 Publishing to GitHub
-Initialize and push your project:
+Poetry – dependency management & packaging
 
-bash
-Copy
-Edit
-git init
-git remote add origin https://github.com/your-username/pubmed_cli_tool.git
-git add .
-git commit -m "Initial commit"
-git push -u origin main
-✅ Confirm your code is published at:
+unittest – built-in Python testing framework
 
-arduino
-Copy
-Edit
-https://github.com/your-username/pubmed_cli_tool
-📎 Output Example (CSV)
-A sample row from the generated CSV:
+✅ Running Tests
+poetry run pytest
+This runs both:
 
-csv
-Copy
-Edit
-PubMed ID,Title,Publication Date,Non-academic Author(s),Company Affiliations,Corresponding Email
-40738546,"Nanoparticles for mRNA-based cancer immunotherapy.","2025-Jul","Rakesh Pahwa; Gulshan Sharma","Institute
+tests/test_core.py – tests for business logic
+
+tests/test_cli.py – tests for CLI behavior using Click’s CliRunner
+
+📝 CSV Output Format
+Example CSV output (results.csv):
+
+PubMed ID	Title	Publication Date	Non-academic Author(s)	Company Affiliations	Corresponding Email
+40739319	In-vitro assessment...	2025-Jul	Rupali Ghosh; Noor Fatima	Jamia Hamdard Biotech Lab	swajid@jamiahamdard.ac.in
+
+Each row represents a filtered article with at least one industry-affiliated author.
+
+🙌 Contributing
+Pull requests and suggestions are welcome! Please open an issue for any bugs or ideas.
+
+📄 License
+MIT License © Kayalvizhi P
