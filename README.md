@@ -28,21 +28,21 @@ Poetry will automatically create a virtual environment and install all required 
 
 poetry install
 
-# Clone the Repository
+## Clone the Repository
 git clone https://github.com/your-username/pubmed_cli_tool.git
 
 cd pubmed_cli_tool
 
 Replace your-username with your actual GitHub username.
 
-# Environment Setup
+## Environment Setup
 Create a .env file in the project root with your registered email to use NCBI’s Entrez API.
 
 NCBI_EMAIL=your.email@example.com
 
 This email is required by NCBI to monitor usage and prevent abuse.
 
-# Usage
+## Usage
 Use the command-line tool to search PubMed and extract article metadata.
 
 Example
@@ -59,7 +59,7 @@ Save results to results.csv
 
 Print debug information if enabled
 
-# Optional Flags
+## Optional Flags
 Option	Description
 
 --file	Save the results to a CSV file
@@ -68,7 +68,7 @@ Option	Description
 
 --debug	 Enable verbose logging and error tracing
 
-# Exposing CLI as get-papers-list
+## Exposing CLI as get-papers-list
 Already configured in pyproject.toml:
 
 [tool.poetry.scripts]
@@ -79,14 +79,14 @@ Now you can run the tool like this:
 
 poetry run get-papers-list "breast cancer" --max-results 2
 
-## 📚Libraries Used
+## Libraries Used
 - [Click](https://click.palletsprojects.com/) – elegant CLI creation
 - [Biopython](https://biopython.org/) – access to NCBI Entrez API
 - [python-dotenv](https://github.com/theskumar/python-dotenv) – manage environment variables
 - [Poetry](https://python-poetry.org/) – dependency management & packaging
 - [unittest](https://docs.python.org/3/library/unittest.html) – built-in Python testing framework
 
-# Running Tests
+## Running Tests
 poetry run pytest
 
 This runs both:
@@ -95,12 +95,12 @@ tests/test_core.py – tests for business logic
 
 tests/test_cli.py – tests for CLI behavior using Click’s CliRunner
 
-# CSV Output Format
+## CSV Output Format
 Example CSV output (results.csv):
 
-PubMed ID	Title	Publication Date	Non-academic Author(s)	Company Affiliations	Corresponding Email
+PubMed ID	  Title	   Publication Date	   Non-academic Author(s)	  Company Affiliations	  Corresponding Email
 
-40739319	In-vitro assessment...	2025-Jul	Rupali Ghosh; Noor Fatima	Jamia Hamdard Biotech Lab	swajid@jamiahamdard.ac.in
+40739319	  In-vitro assessment...	  2025-Jul	   Rupali Ghosh; Noor Fatima	J  amia Hamdard Biotech Lab	   swajid@jamiahamdard.ac.in
 
 Each row represents a filtered article with at least one industry-affiliated author.
 
