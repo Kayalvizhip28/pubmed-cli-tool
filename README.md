@@ -24,15 +24,13 @@ pubmed_cli_tool/
 ---
 
 ## 📦 Installation (via Poetry)
+Poetry will automatically create a virtual environment and install all required packages:
+poetry install
 
-Make sure you have [Poetry](https://python-poetry.org/docs/#installation) installed.
 # Clone the Repository
 git clone https://github.com/your-username/pubmed_cli_tool.git
 cd pubmed_cli_tool
 Replace your-username with your actual GitHub username.
-
-# Install Dependencies with Poetry
-poetry install
 
 # Environment Setup
 Create a .env file in the project root with your registered email to use NCBI’s Entrez API.
