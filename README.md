@@ -2,7 +2,7 @@
 
 A Python-based command-line interface (CLI) to search PubMed articles and filter authors with **non-academic (industry)** affiliations such as Biotech, Pharma, Diagnostics, etc.
 
-This tool fetches relevant articles using the **NCBI Entrez API**, parses metadata like author names, affiliations, publication date, and email, and optionally saves the results to a CSV file.
+This tool fetches relevant articles using the **NCBI Entrez API**, parses metadata like author names, affiliations, publication date, and email, and saves the results to a CSV file.
 
 ---
 
@@ -11,8 +11,8 @@ This tool fetches relevant articles using the **NCBI Entrez API**, parses metada
 pubmed_cli_tool/
 ├── src/
 │ └── pubmed_cli_tool/
-│ ├── core.py # Business logic for data fetching, filtering, and CSV saving
-│ └── cli.py # CLI command handler using Click
+│ ├── cli.py # CLI command handler using Click
+│ └── core.py # Business logic for data fetching, filtering, and CSV saving
 ├── tests/
 │ ├── test_core.py # Unit tests for core logic
 │ └── test_cli.py # Unit tests for CLI interactions using CliRunner
