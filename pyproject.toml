@@ -1,23 +1,22 @@
 [tool.poetry]
 name = "pubmed-cli-tool"
 version = "0.1.0"
-description = "CLI tool to search PubMed articles with industry affiliations"
-authors = ["Kayal <kayalp2001@gmail.com>"]
-readme = "README.md"
+description = "A Python CLI to search PubMed and extract industry-related articles."
+authors = ["Kayalvizhi P"]
 packages = [{ include = "pubmed_cli_tool", from = "src" }]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4.0"
-click = "^8.1.7"
-biopython = "^1.81"
-python-dotenv = "^1.0.0"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.4"
+python = "^3.10"
+click = "^8.1.3"
+biopython = "^1.83"
+python-dotenv = "^1.0.1"
 
 [tool.poetry.scripts]
 get-papers-list = "pubmed_cli_tool.cli:search"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+
 [build-system]
-requires = ["poetry-core>=1.6.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

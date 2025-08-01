@@ -1,40 +1,16 @@
-# src/pubmed_cli_tool/cli.py
-
 import click
 from typing import Optional
 from Bio import Entrez
 from pubmed_cli_tool.core import extract_details, save_to_csv
 
-
 @click.command()
 @click.argument("query")
-@click.option(
-    "--max-results",
-    default=5,
-    type=int,
-    help="Maximum number of articles to fetch from PubMed (default is 5)."
-)
-@click.option(
-    "--file",
-    default=None,
-    type=str,
-    help="CSV file path to save the filtered output."
-)
-@click.option(
-    "--debug",
-    is_flag=True,
-    help="Enable debug logging to display extra processing information."
-)
+@click.option("--max-results", default=5, help="Maximum number of articles to fetch.")
+@click.option("--file", default=None, help="CSV file path for output.")
+@click.option("--debug", is_flag=True, help="Enable verbose logging.")
 def search(query: str, max_results: int, file: Optional[str], debug: bool) -> None:
     """
-    CLI command to search PubMed for articles matching the query,
-    extract industry-affiliated article metadata, and optionally save to CSV.
-
-    Args:
-        query (str): Search query for PubMed.
-        max_results (int): Maximum number of articles to fetch.
-        file (Optional[str]): Path to save output CSV file.
-        debug (bool): Enable debug logging if True.
+    CLI command to search PubMed articles and optionally save filtered results to CSV.
     """
     if debug:
         click.echo(f"🔍 Searching PubMed for: {query}, max results: {max_results}")
@@ -64,10 +40,7 @@ def search(query: str, max_results: int, file: Optional[str], debug: bool) -> No
             click.echo(f"⚠️ No industry affiliation found for PubMed ID: {pubmed_id}")
 
     if file and results:
-        try:
-            save_to_csv(file, results)
-            click.echo(f"\n✅ Results saved to {file}")
-        except Exception as e:
-            click.echo(f"❌ Failed to save CSV file: {e}")
+        save_to_csv(file, results)
+        click.echo(f"\n✅ Results saved to {file}")
     elif not results:
         click.echo("⚠️ No industry-related articles found.")
