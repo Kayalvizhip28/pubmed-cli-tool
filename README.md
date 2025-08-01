@@ -10,15 +10,16 @@ This tool fetches relevant articles using the **NCBI Entrez API**, parses metada
 
 pubmed_cli_tool/
 ├── src/
-│ └── pubmed_cli_tool/
-│ ├── cli.py # CLI command handler using Click
-│ └── core.py # Business logic for data fetching, filtering, and CSV saving
+│   └── pubmed_cli_tool/
+│       ├── cli.py          # CLI command handler using Click
+│       └── core.py         # Business logic for data fetching, filtering, and CSV saving
 ├── tests/
-│ ├── test_core.py # Unit tests for core logic
-│ └── test_cli.py # Unit tests for CLI interactions using CliRunner
-├── .env # Contains sensitive config (e.g., NCBI_EMAIL)
-├── pyproject.toml # Poetry project config and CLI entry definition
-└── README.md # Project documentation (you are here!)
+│   ├── test_core.py        # Unit tests for core logic
+│   └── test_cli.py         # Unit tests for CLI interactions using CliRunner
+├── data/                   # Folder containing saved CSV files from PubMed queries
+├── .env                    # Contains sensitive config (e.g., NCBI_EMAIL)
+├── pyproject.toml          # Poetry project config and CLI entry definition
+└── README.md               # Project documentation (you are here!)
 
 
 ---
